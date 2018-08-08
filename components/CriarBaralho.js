@@ -1,0 +1,74 @@
+import React from 'react'
+import { View, Text, StyleSheet, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native'
+import { FontAwesome } from '@expo/vector-icons';
+import { novoBaralho } from '../util/api'
+
+export default class CriarBaralho extends React.Component {
+    state  = {
+        validado: true,
+        value : ''
+    }
+    
+    updateValue = value => {
+        this.setState({ value })
+    }
+    
+    submit = () => {
+        let value = this.state.value
+        novoBaralho({[value]: { title: value }})
+        .then()
+    }
+    render() {
+        const { validado, value } = this.state
+        
+        return (
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
+                <Text style={[styles.containerText]}> 
+                    Escreva o nome do novo baralho 
+                </Text>
+                <TextInput 
+                    style={{ width: 210, textDecorationLine:"none" }}
+                    underlineColorAndroid='#7f8c8d' 
+                    value={value} 
+                    onChangeText={this.updateValue}/> 
+                <Text style={styles.validate} >
+                    {!validado && "Esse Campo é Obrigatório" } 
+                </Text> 
+                <TouchableHighlight onPress={this.submit}> 
+                    <View style={styles.btn}>
+                        <FontAwesome name='send-o' style={[styles.btnText]}/>
+                        <Text style={[styles.btnText]}> Enviar </Text>
+                    </View>
+                </TouchableHighlight>
+            </KeyboardAvoidingView>
+        )
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        alignItems:'center',
+        justifyContent:'center',
+        flex:1
+    },
+    containerText: {
+        fontSize: 20,
+        color: '#7f8c8d',
+    },
+    validate: {
+        color: "#e74c3c",
+        fontSize: 10
+    },
+    btn: {
+        backgroundColor:'#7f8c8d',
+        justifyContent:'center',
+        flexDirection: 'row',
+        padding:10,
+        alignItems: 'center',
+        width:160
+    },
+    btnText: {
+        color:"#fff",
+        fontSize:12
+    }
+})
