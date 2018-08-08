@@ -1,11 +1,12 @@
 import { ADICIONAR_BARALHO, PREENCHER_STORE } from '../actions'
 
-function baralhos (state = {}, action) {
+function baralhos (state = {baralhos:{} }, action) {
     switch(action.type) {
         
         case PREENCHER_STORE: {
             return {
-                state:action.baralho
+                ...state,
+                [baralhos]: {...action.baralho }
             }
         }
         

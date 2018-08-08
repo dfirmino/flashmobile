@@ -10,7 +10,8 @@ import { connect } from 'react-redux'
 class Home extends React.Component {
     
     componentDidMount() {
-       console.log(this.state)
+        let { preencherStore } = this.props
+        getBaralhos().then(baralhos => preencherStore({JavaScript: {title: 'JavaScript'}}))
     }
     
     navigate = () => {
@@ -23,11 +24,10 @@ class Home extends React.Component {
     }
     
     render() {
-        console.log('state', this.state)
         return (
             <View>
                 <ScrollView>
-                    <Text> a </Text>
+                    <Text> {JSON.stringify(this.props.baralhos)} </Text>
                     <BaralhoPreview click={this.navigateDetalhe} />
                     <BaralhoPreview click={this.navigateDetalhe} />
                     <BaralhoPreview click={this.navigateDetalhe} />
@@ -39,9 +39,10 @@ class Home extends React.Component {
 }
 
 
-function mapStateToProps ({ baralhos }) {
+function mapStateToProps (state) {
+    console.log('MAPDISPATCH TO PROPS', state)
     return {
-        ...baralhos,
+        ...state,
     }
 }
 
