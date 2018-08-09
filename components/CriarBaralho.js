@@ -2,8 +2,10 @@ import React from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 import { novoBaralho } from '../util/api'
+import { connect } from 'react-redux'
+import { adicionarBaralho } from '../actions'
 
-export default class CriarBaralho extends React.Component {
+class CriarBaralho extends React.Component {
     state  = {
         validado: true,
         value : ''
@@ -14,9 +16,9 @@ export default class CriarBaralho extends React.Component {
     }
     
     submit = () => {
+        { adicionarBaralho } this.props
         let value = this.state.value
-        novoBaralho({[value]: { title: value }})
-        .then()
+        adicionarBaralho({[value]: { title: value }})
     }
     render() {
         const { validado, value } = this.state
@@ -72,3 +74,13 @@ const styles = StyleSheet.create({
         fontSize:12
     }
 })
+
+
+function mapDispatchToProps (dispatch) {
+  
+    return {
+      adicionarBaralho: (baralho) => dispatch(adicionarBaralho(baralho))
+    }
+}
+
+export default connect(null,mapDispatchToProps)(CriarBaralho)
