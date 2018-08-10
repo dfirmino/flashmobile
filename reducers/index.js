@@ -8,7 +8,6 @@ function baralhos (state = {baralhos:{} }, action) {
                 baralhos: {...action.baralho }
             }
         }
-        
         case ADICIONAR_BARALHO:
             console.log('cheguei aqui')
             return {

@@ -18,21 +18,23 @@ class Home extends React.Component {
         const { navigation } = this.props
         navigation.navigate('Novo')
     }
-    navigateDetalhe = () => {
+    navigateDetalhe = baralho => {
         const { navigation } = this.props
-        navigation.navigate('Detalhe')
+        navigation.navigate('Detalhe', { baralho: baralho})
     }
     
     render() {
+        let { baralhos } = this.props
+        let arrayBaralhos = Object.values(baralhos)
         return (
             <View>
                 <ScrollView>
-                    <Text> {JSON.stringify(this.props.baralhos)} </Text>
-                    <BaralhoPreview click={this.navigateDetalhe} />
-                    <BaralhoPreview click={this.navigateDetalhe} />
-                    <BaralhoPreview click={this.navigateDetalhe} />
-                    <BaralhoPreview click={this.navigateDetalhe} />
+                    { arrayBaralhos && arrayBaralhos.map((baralho,indice) => (
+                        <BaralhoPreview key={indice} click={() => this.navigateDetalhe(baralho) } title={baralho.title} />
+                    )) }
                 </ScrollView>
+                
+                {!arrayBaralhos && <Text> Você não possui Baralhos Cadastrados</Text> }
             </View>
         )
     }

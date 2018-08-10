@@ -1,14 +1,25 @@
 import React from 'react'
 import { View, Text, TextInput, TouchableHighlight, KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
+import { connect } from 'react-redux'
 
-export default class CriarPergunta extends React.Component {
+class CriarPergunta extends React.Component {
     state  = {
-        validado: true
+        validado: true,
+        titulo:'',
+        resposta:''
+    }
+    
+    setTitle = title => {
+        this.setState({ title })
+    } 
+    
+    setResposta = resposta => {
+        this.setState({ resposta })
     }
     
     render() {
-        const { validado } = this.state
+        const { validado, titulo, resposta } = this.state
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
                 
@@ -19,7 +30,9 @@ export default class CriarPergunta extends React.Component {
                 </Text>
                 <TextInput 
                     style={{ width: 210, textDecorationLine:"none" }}
-                    underlineColorAndroid='#7f8c8d' /> 
+                    underlineColorAndroid='#7f8c8d'
+                    value={titulo}
+                    onChangeText={this.setTitle} /> 
                 <Text style={styles.validate} >
                     {!validado && "Esse Campo é Obrigatório" } 
                 </Text> 
@@ -31,7 +44,9 @@ export default class CriarPergunta extends React.Component {
                     style={{ width: 210, textDecorationLine:"none" }}
                     underlineColorAndroid='#7f8c8d'
                     multiline={true}
-                    numberOfLines={4}/> 
+                    numberOfLines={4}
+                    value={resposta}
+                    onChangeText={this.setResposta}/> 
                 <Text style={styles.validate} >
                     {!validado && "Esse Campo é Obrigatório" } 
                 </Text> 
@@ -80,3 +95,11 @@ const styles = StyleSheet.create({
         top: -30
     },
 })
+
+function mapStateToProps (state) {
+    return {
+        ...state,
+    }
+}
+
+export default connect(mapStateToProps,null)(CriarPergunta)

@@ -1,22 +1,29 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { connect } from 'react-redux';
 
 
-export default class BaralhoDetalhe extends React.Component {
+class BaralhoDetalhe extends React.Component {
     
+    static navigationOptions = ({navigation }) => {
+        return {
+          title: navigation.state.params.baralho.title
+        };
+      };
     render() {
         const { navigation } = this.props
-        
+        console.log('detalhe_baralho', this.props)
+        let { baralho } = this.props.navigation.state.params
         return(
             <View style={styles.container}>
                     <View style={{ flex: 0.1, flexDirection:'row' }}>
                         <Text style={[styles.tituloBaralho]}> 
-                            Nome do Baralho 
+                            { baralho.title }
                         </Text>
                     </View>
                     <View style={{ flex: 0.1, flexDirection:'row' }}>
                         <Text style={[styles.cartasBaralho]}>
-                            { 3 } cartas 
+                        { baralho.cartas.length } carta(s) 
                         </Text>
                     </View>
                 <View>
@@ -62,3 +69,5 @@ const styles = StyleSheet.create({
     },    
 
 })
+
+export default connect(null,null)(BaralhoDetalhe)

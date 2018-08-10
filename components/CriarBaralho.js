@@ -16,9 +16,10 @@ class CriarBaralho extends React.Component {
     }
     
     submit = () => {
-        { adicionarBaralho } this.props
+        let { adicionarBaralho } = this.props
         let value = this.state.value
-        adicionarBaralho({[value]: { title: value }})
+        novoBaralho({[value]: { title: value }})
+        adicionarBaralho({[value]: { title: value, cartas: [] }})
     }
     render() {
         const { validado, value } = this.state

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, StatusBar } from 'react-native';
 import Home from './components/Home';
-import { createStackNavigator, TabNavigator } from 'react-navigation'
+import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation'
 import CriarBaralho from './components/CriarBaralho';
 import CriarPergunta from './components/CriarPergunta';
 import BaralhoDetalhe from './components/BaralhoDetalhe'
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   
 })
 
-const Tabs = TabNavigator({
+const Tabs = createMaterialTopTabNavigator({
   Home:{
     screen : Home,
     navigationOptions: {
@@ -63,7 +63,6 @@ const Stack = createStackNavigator({
   Detalhe: {
     screen : BaralhoDetalhe,
     navigationOptions: {
-      title: 'Novo',
       headerTintColor: '#fff',
       headerStyle: {
         backgroundColor: '#d6d7da',
@@ -73,7 +72,6 @@ const Stack = createStackNavigator({
   NovaPergunta: {
     screen: CriarPergunta,
     navigationOptions: {
-      title: 'Novo',
       headerTintColor: '#fff',
       headerStyle: {
         backgroundColor: '#d6d7da',

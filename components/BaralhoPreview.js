@@ -1,9 +1,13 @@
 import React from 'react'
 import { Text, View, StyleSheet, TouchableHighlight} from 'react-native'
+import { connect } from 'react-redux'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-export default class BaralhoPreview extends React.Component {
+
+class BaralhoPreview extends React.Component {
+    
     render() {
-        const { click } = this.props
+        console.log('state',this.props)
+        const { title, click } = this.props
         return (
             <TouchableHighlight onPress={click} >
                 <View style={styles.container}>
@@ -12,7 +16,7 @@ export default class BaralhoPreview extends React.Component {
                     </View>
                     <View style={styles.containerText}>
                         <Text style={styles.text}>
-                            Baralho de Teste
+                            { title }
                         </Text>
                     </View>
                 </View>
@@ -45,3 +49,12 @@ const styles = StyleSheet.create({
         color: '#7f8c8d'
     }
 });
+
+function mapStateToProps (state) {
+    return {
+        ...state,
+    }
+}
+
+
+export default connect(mapStateToProps,null)(BaralhoPreview)
