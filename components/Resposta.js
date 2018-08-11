@@ -24,12 +24,13 @@ export default class Resposta extends React.Component {
             inputRange: [0, 1],
             outputRange: ['0deg', '180deg']
         })
+        let { pergunta, numeroPergunta, qtdPergunta, acerto, erro } = this.props
         return (
             <Animated.View style={{flex: 1, transform: [{rotateY: spin}] }}>
                 <Animated.View style={[styles.container, { transform: [{rotateY: spin}] }]}>
                     
                     <View style={{ flexDirection: "row" }}>    
-                        <Text style={{flexDirection: "row" , alignContent:'center', alignItems:'center', top:-65 }} >{1}/{3}</Text>
+                        <Text style={{flexDirection: "row" , alignContent:'center', alignItems:'center', top:-65 }} >{ numeroPergunta }/{ qtdPergunta }</Text>
                     </View>
                     
                     <View style={{ flexDirection: "row" , alignContent:'center', alignItems:'center' }}>    
@@ -37,15 +38,15 @@ export default class Resposta extends React.Component {
                     </View>
                     
                     <View style={{ flexDirection: "row" , alignContent:'center', alignItems:'center' }}>
-                        <Text style={[styles.text]}> Conteúdo da Resposta </Text>
+                        <Text style={[styles.text]}> { pergunta.resposta } </Text>
                     </View>
                 
                     <View>
-                        <TouchableOpacity style={[styles.btn, { backgroundColor: "#2ecc71"}]}>
+                        <TouchableOpacity style={[styles.btn, { backgroundColor: "#2ecc71"}]} onPress={acerto}>
                             <Text style={{color: "#fff" }}> Acertou </Text>
                         </TouchableOpacity>
                         
-                        <TouchableOpacity style={[styles.btn, { backgroundColor: "#e74c3c"}]}>
+                        <TouchableOpacity style={[styles.btn, { backgroundColor: "#e74c3c"}]} onPress={erro}>
                             <Text style={{color: "#fff" }}> Errou </Text>
                         </TouchableOpacity>
                     </View>

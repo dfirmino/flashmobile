@@ -20,7 +20,7 @@ class Home extends React.Component {
     }
     navigateDetalhe = baralho => {
         const { navigation } = this.props
-        navigation.navigate('Detalhe', { baralho: baralho})
+        navigation.navigate('Detalhe', { baralhoTitulo: baralho.title})
     }
     
     render() {

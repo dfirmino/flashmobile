@@ -2,22 +2,37 @@ import React from 'react'
 import { View, Text, TextInput, TouchableHighlight, KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux'
+import { adicionarCarta } from '../actions'
 
 class CriarPergunta extends React.Component {
+    
+    static navigationOptions = ({navigation }) => {
+        return {
+          title: navigation.state.params.baralhoTitulo
+        };
+    };
+
     state  = {
         validado: true,
         titulo:'',
         resposta:''
     }
     
-    setTitle = title => {
-        this.setState({ title })
+    setTitle = titulo => {
+        this.setState({ titulo })
     } 
     
     setResposta = resposta => {
         this.setState({ resposta })
     }
     
+    submit = () => {
+        let { titulo, resposta } = this.state 
+        let { adicionarCarta } = this.props
+        let { baralhoTitulo } = this.props.navigation.state.params
+        adicionarCarta(baralhoTitulo,{titulo ,resposta })
+        this.props.navigation.navigate('Detalhe', { baralhoTitulo: baralhoTitulo})
+    }
     render() {
         const { validado, titulo, resposta } = this.state
         return (
@@ -102,4 +117,10 @@ function mapStateToProps (state) {
     }
 }
 
-export default connect(mapStateToProps,null)(CriarPergunta)
+function mapDispatchToProps (dispatch) {
+    return {
+        adicionarCarta: (baralho,carta) => dispatch(adicionarCarta(baralho,carta))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CriarPergunta)

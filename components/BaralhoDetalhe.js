@@ -7,18 +7,20 @@ class BaralhoDetalhe extends React.Component {
     
     static navigationOptions = ({navigation }) => {
         return {
-          title: navigation.state.params.baralho.title
+          title: navigation.state.params.baralhoTitulo
         };
       };
     render() {
         const { navigation } = this.props
-        console.log('detalhe_baralho', this.props)
-        let { baralho } = this.props.navigation.state.params
+        let { baralhoTitulo } = this.props.navigation.state.params
+        let baralho  = this.props.baralhos[baralhoTitulo]
+        console.log('baralho no detalhe', baralho)
+        
         return(
             <View style={styles.container}>
                     <View style={{ flex: 0.1, flexDirection:'row' }}>
                         <Text style={[styles.tituloBaralho]}> 
-                            { baralho.title }
+                            { baralhoTitulo }
                         </Text>
                     </View>
                     <View style={{ flex: 0.1, flexDirection:'row' }}>
@@ -27,11 +29,11 @@ class BaralhoDetalhe extends React.Component {
                         </Text>
                     </View>
                 <View>
-                    <TouchableOpacity style={styles.btn} onPress={ () => { navigation.navigate('NovaPergunta') } }>
+                    <TouchableOpacity style={styles.btn} onPress={ () => { navigation.navigate('NovaPergunta',  { baralhoTitulo }) } }>
                         <Text style={{color: "#7f8c8d" }} >Adic. Carta </Text> 
                     </TouchableOpacity>
                     
-                    <TouchableOpacity style={[styles.btn, {backgroundColor: "#7f8c8d" }]} onPress={ () => { navigation.navigate('Carta') } }> 
+                    <TouchableOpacity style={[styles.btn, {backgroundColor: "#7f8c8d" }]} onPress={ () => { navigation.navigate('Carta',  { baralhoTitulo }) } }> 
                         <Text style={{color: "#fff" }}>Iniciar Quiz </Text>
                     </TouchableOpacity>
                 </View>
@@ -70,4 +72,10 @@ const styles = StyleSheet.create({
 
 })
 
-export default connect(null,null)(BaralhoDetalhe)
+function mapStateToProps(state) {
+    return {
+        ...state
+    }
+}
+
+export default connect(mapStateToProps,null)(BaralhoDetalhe)

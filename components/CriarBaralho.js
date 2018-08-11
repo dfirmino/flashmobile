@@ -16,10 +16,11 @@ class CriarBaralho extends React.Component {
     }
     
     submit = () => {
-        let { adicionarBaralho } = this.props
+        let { adicionarBaralho, navigation } = this.props
         let value = this.state.value
         novoBaralho({[value]: { title: value }})
         adicionarBaralho({[value]: { title: value, cartas: [] }})
+        navigation.navigate('Home')
     }
     render() {
         const { validado, value } = this.state

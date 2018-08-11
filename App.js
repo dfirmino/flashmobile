@@ -81,7 +81,6 @@ const Stack = createStackNavigator({
   Carta: {
     screen: Carta,
     navigationOptions: {
-      title: 'Novo',
       headerTintColor: '#fff',
       headerStyle: {
         backgroundColor: '#d6d7da',

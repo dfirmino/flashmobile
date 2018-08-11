@@ -1,28 +1,65 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import Resposta from './Resposta';
+import Resultado from './Resultado'
+import { connect } from 'react-redux'
 
-export default class Carta extends React.Component {
+class Carta extends React.Component {
+    
+    static navigationOptions = ({navigation }) => {
+        return {
+          title: navigation.state.params.baralhoTitulo
+        };
+    };
     
     exibeRespotas = () => {
         this.setState({exibeRespotas: true})
     }
     
+    acertou = () => {
+        this.setState( state => ({
+            ...state,
+            exibeRespotas: false,
+            numeroPergunta: parseInt(state.numeroPergunta) + 1,
+            acertos: parseInt(state.acertos) + 1
+        }))
+    }
+
+    errou = () => {
+        this.setState( state => ({
+            ...state,
+            exibeRespotas: false,
+            numeroPergunta: parseInt(state.numeroPergunta) + 1,
+            erros: parseInt(state.erros) + 1
+        }))
+    }
+
+
     state = {
         exibeRespotas: false,
+        numeroPergunta: 1,
+        acertos: 0,
+        erros: 0
+    
     }
     
     render() {
-        const { exibeRespotas } = this.state
+        const { exibeRespotas, numeroPergunta,acertos } = this.state
+        let { baralhoTitulo } = this.props.navigation.state.params
+        let baralho  = this.props.baralhos[baralhoTitulo]
+        let pergunta = baralho.cartas[numeroPergunta - 1]
         return (
             <View style={{flex: 1 }}>
-                {!exibeRespotas && ( <View style={{flex: 1 }}>
+                
+                { (numeroPergunta -1)  >= baralho.cartas.length && <Resultado acertos={ acertos } total={baralho.cartas.length} navigation={ this.props.navigation }/> }
+                
+                { (numeroPergunta -1)  < baralho.cartas.length && !exibeRespotas && ( <View style={{flex: 1 }}>
                     <View style={{ flexDirection:"row", alignSelf:'flex-start'}}>
-                        <Text style={[styles.text,{top:32, left:10 }] } >{1}/{3}</Text>
+                        <Text style={[styles.text,{top:32, left:10 }] } >{ numeroPergunta }/{baralho.cartas.length}</Text>
                     </View>
                     <View style={styles.container}>
                         <View style={{ flexDirection: "row" }}>
-                            <Text style={styles.text}> Titulo Pergunta </Text>
+                            <Text style={styles.text}> { pergunta.titulo } </Text>
                         </View>
                     
                         <View>
@@ -35,7 +72,7 @@ export default class Carta extends React.Component {
                     </View>
                 </View> )}
             
-                { exibeRespotas && <Resposta/> }
+                { (numeroPergunta -1)  < baralho.cartas.length && exibeRespotas && <Resposta pergunta={ pergunta } numeroPergunta={ numeroPergunta } qtdPergunta={ baralho.cartas.length } acerto={this.acertou} erro={this.errou} /> }
             </View>
         )
     }
@@ -65,3 +102,11 @@ const styles = StyleSheet.create({
     },    
 
 })
+
+
+function mapStateToProps(state) {
+    return {
+        ...state
+    }
+}
+export default connect(mapStateToProps,null)(Carta)

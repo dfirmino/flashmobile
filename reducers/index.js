@@ -1,4 +1,4 @@
-import { ADICIONAR_BARALHO, PREENCHER_STORE } from '../actions'
+import { ADICIONAR_BARALHO, PREENCHER_STORE, ADICIONAR_CARTA } from '../actions'
 
 function baralhos (state = {baralhos:{} }, action) {
     switch(action.type) {
@@ -9,11 +9,23 @@ function baralhos (state = {baralhos:{} }, action) {
             }
         }
         case ADICIONAR_BARALHO:
-            console.log('cheguei aqui')
             return {
                 ...state,
                 baralhos: {...state.baralhos , ...action.baralho }
             }
+        case ADICIONAR_CARTA: {
+            console.log('action',action)
+            return { 
+                baralhos: { 
+                ...state.baralhos,
+                [action.tituloBaralho] : { 
+                        ...state.baralhos[action.tituloBaralho],
+                        cartas:[...state.baralhos[action.tituloBaralho].cartas, { ...action.carta } ]                  
+                    }
+                }
+            }
+        }
+        
         default:
             return state
     }
