@@ -34,7 +34,10 @@ class Carta extends React.Component {
         }))
     }
 
-
+    reload = () => {
+        this.setState({ exibeRespotas: false, numeroPergunta: 1, acertos: 0,erros: 0 })
+    }
+    
     state = {
         exibeRespotas: false,
         numeroPergunta: 1,
@@ -51,7 +54,7 @@ class Carta extends React.Component {
         return (
             <View style={{flex: 1 }}>
                 
-                { (numeroPergunta -1)  >= baralho.cartas.length && <Resultado acertos={ acertos } total={baralho.cartas.length} navigation={ this.props.navigation }/> }
+                { (numeroPergunta -1)  >= baralho.cartas.length && <Resultado acertos={ acertos } total={baralho.cartas.length} navigation={ this.props.navigation } reload={this.reload}/> }
                 
                 { (numeroPergunta -1)  < baralho.cartas.length && !exibeRespotas && ( <View style={{flex: 1 }}>
                     <View style={{ flexDirection:"row", alignSelf:'flex-start'}}>

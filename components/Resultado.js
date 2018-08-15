@@ -1,10 +1,17 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
+import { removeNotificacao, criarNotificacao} from '../util/notificacao'
 
 export default class Resultado extends React.Component {
+    
+    componentDidMount() {
+        removeNotificacao()
+        .then(criarNotificacao)
+    }
+    
     render() {
-        let  { acertos,total,navigation } = this.props
+        let  { acertos,total,navigation, reload } = this.props
         return (
             <View style={[styles.container, { paddingLeft:30,paddingTop:50 }]}>
                 <Text style={styles.containerText}> 
@@ -18,6 +25,13 @@ export default class Resultado extends React.Component {
                     <View style={[styles.btn]}>
                         <FontAwesome name='home' style={[styles.btnText]}/>
                         <Text style={[styles.btnText]}> Voltar </Text>
+                    </View>
+                </TouchableHighlight>
+                
+                <TouchableHighlight onPress={reload} style={{top:-95, left:-13, marginTop:10 }}> 
+                    <View style={[styles.btn]}>
+                        <FontAwesome name='refresh' style={[styles.btnText]}/>
+                        <Text style={[styles.btnText]}> Reiniciar </Text>
                     </View>
                 </TouchableHighlight>
 
