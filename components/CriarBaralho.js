@@ -7,7 +7,6 @@ import { adicionarBaralho } from '../actions'
 
 class CriarBaralho extends React.Component {
     state  = {
-        validado: true,
         value : ''
     }
     
@@ -23,7 +22,7 @@ class CriarBaralho extends React.Component {
         navigation.navigate('Home')
     }
     render() {
-        const { validado, value } = this.state
+        const { value } = this.state
         
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
@@ -35,9 +34,6 @@ class CriarBaralho extends React.Component {
                     underlineColorAndroid='#7f8c8d' 
                     value={value} 
                     onChangeText={this.updateValue}/> 
-                <Text style={styles.validate} >
-                    {!validado && "Esse Campo é Obrigatório" } 
-                </Text> 
                 <TouchableHighlight onPress={this.submit}> 
                     <View style={styles.btn}>
                         <FontAwesome name='send-o' style={[styles.btnText]}/>

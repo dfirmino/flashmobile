@@ -14,7 +14,6 @@ class CriarPergunta extends React.Component {
     };
 
     state  = {
-        validado: true,
         titulo:'',
         resposta:''
     }
@@ -37,7 +36,7 @@ class CriarPergunta extends React.Component {
         
     }
     render() {
-        const { validado, titulo, resposta } = this.state
+        const { titulo, resposta } = this.state
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
                 
@@ -50,10 +49,7 @@ class CriarPergunta extends React.Component {
                     style={{ width: 210, textDecorationLine:"none" }}
                     underlineColorAndroid='#7f8c8d'
                     value={titulo}
-                    onChangeText={this.setTitle} /> 
-                <Text style={styles.validate} >
-                    {!validado && "Esse Campo é Obrigatório" } 
-                </Text> 
+                    onChangeText={this.setTitle} />  
                 
                 <Text style={[styles.containerText]}> 
                     Escreva a resposta da Pergunta 
@@ -64,10 +60,7 @@ class CriarPergunta extends React.Component {
                     multiline={true}
                     numberOfLines={4}
                     value={resposta}
-                    onChangeText={this.setResposta}/> 
-                <Text style={styles.validate} >
-                    {!validado && "Esse Campo é Obrigatório" } 
-                </Text> 
+                    onChangeText={this.setResposta}/>  
                 
                 <TouchableHighlight onPress={this.submit}> 
                     <View style={styles.btn}>
