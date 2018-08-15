@@ -1,7 +1,5 @@
 import React from 'react'
 import { View, ScrollView, Text } from 'react-native'
-import Cabecalho from './Cabecalho';
-import WidgetNovoBaralho from './WidgetNovoBaralho';
 import BaralhoPreview from './BaralhoPreview';
 import { preencherStore } from '../actions'
 import { getBaralhos } from "../util/api"
