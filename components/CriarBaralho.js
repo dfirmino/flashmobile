@@ -18,7 +18,7 @@ class CriarBaralho extends React.Component {
     submit = () => {
         let { adicionarBaralho, navigation } = this.props
         let value = this.state.value
-        novoBaralho({[value]: { title: value }})
+        novoBaralho({[value]: { title: value, cartas: [] }})
         adicionarBaralho({[value]: { title: value, cartas: [] }})
         navigation.navigate('Home')
     }

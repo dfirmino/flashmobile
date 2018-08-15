@@ -14,7 +14,6 @@ class BaralhoDetalhe extends React.Component {
         const { navigation } = this.props
         let { baralhoTitulo } = this.props.navigation.state.params
         let baralho  = this.props.baralhos[baralhoTitulo]
-        console.log('baralho no detalhe', baralho)
         
         return(
             <View style={styles.container}>

@@ -6,7 +6,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 class BaralhoPreview extends React.Component {
     
     render() {
-        console.log('state',this.props)
         const { title, click } = this.props
         return (
             <TouchableHighlight onPress={click} >

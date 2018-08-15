@@ -10,8 +10,13 @@ import { FontAwesome, Entypo } from '@expo/vector-icons';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import baralhos from './reducers'
+import { setNotificacao } from './util/notificacao'
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setNotificacao()
+  }
+  
   
   render() {
     return (

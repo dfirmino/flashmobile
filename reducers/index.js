@@ -14,7 +14,6 @@ function baralhos (state = {baralhos:{} }, action) {
                 baralhos: {...state.baralhos , ...action.baralho }
             }
         case ADICIONAR_CARTA: {
-            console.log('action',action)
             return { 
                 baralhos: { 
                 ...state.baralhos,

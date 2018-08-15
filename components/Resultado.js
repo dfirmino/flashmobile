@@ -11,7 +11,7 @@ export default class Resultado extends React.Component {
                     Parabéns você conclui todas as perguntas 👏
                 </Text>
                 <View style={styles.container}>
-                    <Text style={[styles.containerText,{ left:-10 }]}> { (parseInt(total) / parseInt(acertos)) * 100 }% de Acertos </Text>
+                    <Text style={[styles.containerText,{ left:-10 }]}> { (parseInt(acertos) / parseInt(total)) * 100 }% de Acertos </Text>
                 </View>
 
                 <TouchableHighlight onPress={() => {navigation.navigate('Home') }} style={{top:-95, left:-13 }}> 

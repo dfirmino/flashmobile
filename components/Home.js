@@ -11,7 +11,9 @@ class Home extends React.Component {
     
     componentDidMount() {
         let { preencherStore } = this.props
-        getBaralhos().then(baralhos => preencherStore(baralhos))
+        getBaralhos().then(baralhos => {
+            preencherStore(baralhos)
+        })
     }
     
     navigate = () => {

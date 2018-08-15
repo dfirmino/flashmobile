@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableHighlight, KeyboardAvoidingView, StyleS
 import { FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux'
 import { adicionarCarta } from '../actions'
+import { adicionarCartaStore } from '../util/api'
 
 class CriarPergunta extends React.Component {
     
@@ -31,7 +32,9 @@ class CriarPergunta extends React.Component {
         let { adicionarCarta } = this.props
         let { baralhoTitulo } = this.props.navigation.state.params
         adicionarCarta(baralhoTitulo,{titulo ,resposta })
+        adicionarCartaStore(baralhoTitulo,{titulo ,resposta })
         this.props.navigation.navigate('Detalhe', { baralhoTitulo: baralhoTitulo})
+        
     }
     render() {
         const { validado, titulo, resposta } = this.state
