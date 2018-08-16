@@ -11,7 +11,7 @@ export default class Resultado extends React.Component {
     }
     
     render() {
-        let  { acertos,total,navigation, reload } = this.props
+        let  { acertos,total,navigation, reload, title } = this.props
         return (
             <View style={[styles.container, { paddingLeft:30,paddingTop:50 }]}>
                 <Text style={styles.containerText}> 
@@ -21,7 +21,7 @@ export default class Resultado extends React.Component {
                     <Text style={[styles.containerText,{ left:-10 }]}> { (parseInt(acertos) / parseInt(total)) * 100 }% de Acertos </Text>
                 </View>
 
-                <TouchableHighlight onPress={() => {navigation.navigate('Home') }} style={{top:-95, left:-13 }}> 
+                <TouchableHighlight onPress={() => {navigation.navigate('Detalhe', { baralhoTitulo: title}) }} style={{top:-95, left:-13 }}> 
                     <View style={[styles.btn]}>
                         <FontAwesome name='home' style={[styles.btnText]}/>
                         <Text style={[styles.btnText]}> Voltar </Text>
