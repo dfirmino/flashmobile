@@ -19,7 +19,7 @@ class CriarBaralho extends React.Component {
         let value = this.state.value
         novoBaralho({[value]: { title: value, cartas: [] }})
         adicionarBaralho({[value]: { title: value, cartas: [] }})
-        navigation.navigate('Home')
+        navigation.navigate('Detalhe', { baralhoTitulo: value})
     }
     render() {
         const { value } = this.state

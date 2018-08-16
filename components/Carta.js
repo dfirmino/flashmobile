@@ -54,7 +54,7 @@ class Carta extends React.Component {
         return (
             <View style={{flex: 1 }}>
                 
-                { (numeroPergunta -1)  >= baralho.cartas.length && <Resultado acertos={ acertos } total={baralho.cartas.length} navigation={ this.props.navigation } reload={this.reload}/> }
+                { (numeroPergunta -1)  >= baralho.cartas.length && <Resultado acertos={ acertos } total={baralho.cartas.length} navigation={ this.props.navigation } reload={this.reload} title={baralhoTitulo}/> }
                 
                 { (numeroPergunta -1)  < baralho.cartas.length && !exibeRespotas && ( <View style={{flex: 1 }}>
                     <View style={{ flexDirection:"row", alignSelf:'flex-start'}}>
